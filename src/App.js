@@ -1,12 +1,14 @@
-import { Container } from "semantic-ui-react";
-import PlacesList from "./components/organisms/PlacesList/PlacesList";
+import { Route, Switch } from "react-router";
+import PageHome from "./components/pages/PageHome";
+import PagePlace from "./components/pages/PagePlace";
 
 function App() {
   return (
     <div className="App">
-      <Container>
-        <PlacesList />
-      </Container>
+      <Switch>
+        <Route path="/place/:id" component={PagePlace} />
+        <Route exact path="/" component={PageHome} />
+      </Switch>
     </div>
   );
 }

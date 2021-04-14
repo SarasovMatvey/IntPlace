@@ -3,12 +3,14 @@ import PlaceCard from "../../atoms/PlaceCard";
 import Masonry from "react-responsive-masonry";
 import sygicAxios from "../../../api/sygic";
 import "./PlacesList.sass";
+import { useHistory } from "react-router-dom";
 
 const COUNTRY_ID = 43;
 const LOADING_NEW_PAGE_OFFSET = 100;
 const PLACES_IN_PAGE = 20;
 
 function PlacesList() {
+  const history = useHistory();
   const placesListRef = useRef(null);
   const [shownPagesCount, setShownPagesCount] = useState(1);
   const [places, setPlaces] = useState([]);
@@ -58,18 +60,25 @@ function PlacesList() {
   return (
     <div className="places-list" ref={placesListRef}>
       <Masonry gutter="2rem" columnsCount={4}>
-        {places.map((placeInfo, index) => (
+        {places.map(placeInfo => (
           <PlaceCard
-            key={index}
+            className="place-list__card"
+            key={placeInfo.id}
             fluid
             title={placeInfo.name}
             poster={placeInfo.thumbnail_url}
             description={placeInfo.perex}
+            placeId={placeInfo.id}
+            onClick={e => goToPlaceInfoPage(e.currentTarget.dataset.id)}
           />
         ))}
       </Masonry>
     </div>
   );
+
+  function goToPlaceInfoPage(placeId) {
+    history.push(`place/${placeId}`);
+  }
 }
 
 export default PlacesList;
