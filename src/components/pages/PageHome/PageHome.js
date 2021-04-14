@@ -1,14 +1,16 @@
-import React from "react";
 import { Container } from "semantic-ui-react";
 import PlacesList from "../../organisms/PlacesList";
+import BaseTemplate from "../../templates/BaseTemplate/BaseTemplate";
 
 function PageHome() {
   return (
-    <div className="page-home">
-      <Container>
-        <PlacesList />
-      </Container>
-    </div>
+    <BaseTemplate>
+      <div className="page-home">
+        <Container>
+          <PlacesList />
+        </Container>
+      </div>
+    </BaseTemplate>
   );
 }
 

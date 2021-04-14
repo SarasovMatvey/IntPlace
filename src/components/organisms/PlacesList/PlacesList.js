@@ -4,6 +4,7 @@ import Masonry from "react-responsive-masonry";
 import sygicAxios from "../../../api/sygic";
 import "./PlacesList.sass";
 import { useHistory } from "react-router-dom";
+import { Input } from "semantic-ui-react";
 
 const COUNTRY_ID = 43;
 const LOADING_NEW_PAGE_OFFSET = 100;
@@ -16,13 +17,25 @@ function PlacesList() {
   const [places, setPlaces] = useState([]);
   const [isContentLoading, setIsContentLoading] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchBarValue, setSearchBarValue] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
 
   useEffect(() => {
-    const url = `
+    const url = searchQuery
+      ? `
+      /places/list?
+      query=${searchQuery.replace(/\s/g, "%20")}&
+      parents=country:${COUNTRY_ID}
+      &offset=${(shownPagesCount - 1) * PLACES_IN_PAGE}
+      &levels=poi
+      &limit=${PLACES_IN_PAGE}
+      `
+      : `
       /places/list?
         parents=country:${COUNTRY_ID}
         &offset=${(shownPagesCount - 1) * PLACES_IN_PAGE}
-        &levels=poi&limit=${PLACES_IN_PAGE}
+        &levels=poi
+        &limit=${PLACES_IN_PAGE}
         &categories=eating%7Ctraveling%7Cshopping
     `;
 
@@ -31,9 +44,11 @@ function PlacesList() {
       setPlaces(places => [...places, ...data.places]);
       setIsContentLoading(false);
     });
-  }, [shownPagesCount]);
+  }, [shownPagesCount, searchQuery]);
 
   const onScroll = useCallback(() => {
+    if (!placesListRef.current) return;
+
     const windowPos = window.scrollY;
     const placesListBottomPos =
       placesListRef.current.getBoundingClientRect().bottom + windowPos;
@@ -59,6 +74,18 @@ function PlacesList() {
 
   return (
     <div className="places-list" ref={placesListRef}>
+      <Input
+        className="places-list__search-bar"
+        size="huge"
+        icon={{
+          name: "search",
+          circular: true,
+          link: true,
+          onClick: () => findPlace(searchBarValue),
+        }}
+        placeholder="Find Place..."
+        onChange={e => setSearchBarValue(e.currentTarget.value)}
+      />
       <Masonry gutter="2rem" columnsCount={4}>
         {places.map(placeInfo => (
           <PlaceCard
@@ -78,6 +105,19 @@ function PlacesList() {
 
   function goToPlaceInfoPage(placeId) {
     history.push(`place/${placeId}`);
+  }
+
+  function findPlace(query) {
+    setSearchQuery(query);
+    setShownPagesCount(1);
+
+    const url = `/places/list?
+      query=${query.replace(/\s/g, "%20")}&
+      parents=country:${COUNTRY_ID}
+      &categories=eating%7Ctraveling%7Cshopping
+
+    `;
+    sygicAxios(url).then(({ data: { data } }) => setPlaces(data.places));
   }
 }
 

@@ -20,26 +20,28 @@ function PlaceInfo({ mainImg, placeName, description, media = [], params }) {
             ) : null
           )}
         </List>
-        <Swiper
-          className="place-info__swiper"
-          spaceBetween={50}
-          slidesPerView={media.length >= 2 ? 2 : 1}
-          observer
-          observeParents
-          observeSlideChildren
-        >
-          {media.map(url => (
-            <SwiperSlide>
-              {getUrlExtension(url) === "jpg" ? (
-                <Image src={url} />
-              ) : (
-                <video className="place-info__video" controls="controls">
-                  <source src={url} />
-                </video>
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div>
+          <Swiper
+            className="place-info__swiper"
+            spaceBetween={50}
+            slidesPerView={media.length >= 2 ? 2 : 1}
+            observer
+            observeParents
+            observeSlideChildren
+          >
+            {media.map(url => (
+              <SwiperSlide>
+                {getUrlExtension(url) === "jpg" ? (
+                  <Image src={url} />
+                ) : (
+                  <video className="place-info__video" controls="controls">
+                    <source src={url} />
+                  </video>
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
       <Image className="place-info__main-img" src={mainImg} size="big" />
     </div>
