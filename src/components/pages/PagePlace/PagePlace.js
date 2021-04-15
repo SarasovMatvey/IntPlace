@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "semantic-ui-react";
+import { Swiper } from "swiper/react";
 import sygicAxios from "../../../api/sygic";
+import NearPlaces from "../../organisms/NearPlaces";
 import PlaceInfo from "../../organisms/PlaceInfo";
 import BaseTemplate from "../../templates/BaseTemplate/BaseTemplate";
 import "./PagePlace.sass";
@@ -25,22 +27,36 @@ function PagePlace() {
       <div className="page-place">
         <Container>
           {placeInfo ? (
-            <PlaceInfo
-              placeName={placeInfo.name}
-              mainImg={placeInfo.main_media?.media[0].url}
-              description={placeInfo.description?.text}
-              media={placeInfo.main_media?.media
-                .slice(1)
-                .map(mediaData => mediaData.url)}
-              params={{
-                Address: placeInfo.address,
-                Rating: placeInfo.rating.toFixed(1),
-                Phone: placeInfo.phone,
-                Email: placeInfo.email,
-              }}
-              inLocalStorage={inLocalStorage}
-              onFavBtnClick={onFavBtnClick}
-            />
+            <>
+              <Swiper onF></Swiper>
+              <div className="" aria-atomic></div>
+              <PlaceInfo
+                className="page-place__place-info"
+                placeName={placeInfo.name}
+                mainImg={placeInfo.main_media?.media[0].url}
+                description={placeInfo.description?.text}
+                media={placeInfo.main_media?.media
+                  .slice(1)
+                  .map(mediaData => mediaData.url)}
+                params={{
+                  Address: placeInfo.address,
+                  Rating: placeInfo.rating.toFixed(1),
+                  Phone: placeInfo.phone,
+                  Email: placeInfo.email,
+                }}
+                inLocalStorage={inLocalStorage}
+                onFavBtnClick={onFavBtnClick}
+              />
+              <NearPlaces
+                className="page-place__near-places"
+                targetPlaceId={placeId}
+                area={{
+                  lat: placeInfo.location.lat,
+                  lon: placeInfo.location.lng,
+                  radius: 1000,
+                }}
+              />
+            </>
           ) : null}
         </Container>
       </div>

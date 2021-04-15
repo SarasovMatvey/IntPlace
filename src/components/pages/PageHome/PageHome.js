@@ -1,4 +1,5 @@
 import { Container } from "semantic-ui-react";
+import NearPlaces from "../../organisms/NearPlaces";
 import PlacesFinder from "../../organisms/PlacesFinder";
 import BaseTemplate from "../../templates/BaseTemplate";
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Header, Icon, Image, List } from "semantic-ui-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import _ from "lodash";
@@ -6,6 +5,7 @@ import "./PlaceInfo.sass";
 import "swiper/swiper.scss";
 
 function PlaceInfo({
+  className = "",
   mainImg,
   placeName,
   description,
@@ -15,7 +15,7 @@ function PlaceInfo({
   onFavBtnClick,
 }) {
   return (
-    <div className="place-info">
+    <div className={`place-info ${className}`}>
       <button className="place-info__fav-btn" onClick={onFavBtnClick}>
         {inLocalStorage ? <Icon name="star" /> : <Icon name="star outline" />}
       </button>
