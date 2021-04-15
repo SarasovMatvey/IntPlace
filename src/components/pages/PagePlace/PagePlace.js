@@ -15,7 +15,7 @@ function PagePlace() {
     sygicAxios(`/places/${placeId}`).then(({ data: { data } }) => {
       setPlaceInfo(data.place);
     });
-  }, []);
+  }, [placeId]);
 
   return (
     <BaseTemplate>
@@ -24,9 +24,9 @@ function PagePlace() {
           {placeInfo ? (
             <PlaceInfo
               placeName={placeInfo.name}
-              mainImg={placeInfo.main_media.media[0].url}
-              description={placeInfo.description.text}
-              media={placeInfo.main_media.media
+              mainImg={placeInfo.main_media?.media[0].url}
+              description={placeInfo.description?.text}
+              media={placeInfo.main_media?.media
                 .slice(1)
                 .map(mediaData => mediaData.url)}
               params={{

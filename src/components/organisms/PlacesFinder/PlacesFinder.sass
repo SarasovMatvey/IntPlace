@@ -1,10 +1,26 @@
 .places-finder
-  display: flex
-  flex-direction: column    
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
   align-items: center
+  row-gap: 2rem
   &__search-bar
-    margin-bottom: 4rem
+    grid-column-start: 2
+    justify-self: center
+    align-self: center
+  &__settings-btn
+    justify-self: end
+  &__request-settings
+    grid-column-end: span 3
+    .content
+      display: none
+    .content.active
+      display: block
   &__list
     width: 100%
+    grid-column-end: span 3
   &__card
     cursor: pointer
+  &__request-settings-types
+    display: grid
+    grid-auto-flow: column
+    column-gap: 1rem

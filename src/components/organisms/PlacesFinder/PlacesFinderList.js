@@ -4,12 +4,14 @@ import { useHistory } from "react-router-dom";
 import sygicAxios from "../../../api/sygic";
 import useOffset from "../../../utils/hooks/useOffset";
 import PlaceCard from "../../atoms/PlaceCard";
+import { DEFALUT_CATEGORIES_VALUES } from "./PlacesFinder";
 
 function PlacesFinderList({
   searchQuery,
-  loadNewOffset,
   countryId,
+  categories,
   placesInPage,
+  loadNewOffset,
 }) {
   const history = useHistory();
   const placesFinderRef = useRef(null);
@@ -19,51 +21,38 @@ function PlacesFinderList({
 
   useOffset(placesFinderRef, loadNewOffset, () => {
     if (!isContentLoading) {
-      console.log(123);
-
       setShownPagesCount(pagesCount => pagesCount + 1);
     }
   });
 
   useEffect(() => {
-    if (!searchQuery) return;
-
     setShownPagesCount(1);
 
-    const url = `/places/list?
-      query=${searchQuery.replace(/\s/g, "%20")}&
-      parents=country:${countryId}
-      &categories=eating%7Ctraveling%7Cshopping
+    const url = getUrl({
+      searchQuery,
+      countryId,
+      categories,
+      limit: placesInPage,
+    });
 
-    `;
     sygicAxios(url).then(({ data: { data } }) => setPlaces(data.places));
-  }, [searchQuery]);
+  }, [searchQuery, countryId, categories, placesInPage]);
 
   useEffect(() => {
-    const url = searchQuery
-      ? `
-      /places/list?
-      query=${searchQuery.replace(/\s/g, "%20")}&
-      parents=country:${countryId}
-      &offset=${(shownPagesCount - 1) * placesInPage}
-      &levels=poi
-      &limit=${placesInPage}
-      `
-      : `
-      /places/list?
-        parents=country:${countryId}
-        &offset=${(shownPagesCount - 1) * placesInPage}
-        &levels=poi
-        &limit=${placesInPage}
-        &categories=eating%7Ctraveling%7Cshopping
-      `;
+    const url = getUrl({
+      searchQuery,
+      countryId,
+      categories,
+      offset: (shownPagesCount - 1) * placesInPage,
+      limit: placesInPage,
+    });
 
     setIsContentLoading(true);
     sygicAxios(url.replace(/\s/g, "")).then(({ data: { data } }) => {
       setPlaces(places => [...places, ...data.places]);
       setIsContentLoading(false);
     });
-  }, [shownPagesCount, searchQuery]);
+  }, [shownPagesCount, searchQuery, countryId, categories, placesInPage]);
 
   return (
     <div className="places-finder__list" ref={placesFinderRef}>
@@ -86,6 +75,37 @@ function PlacesFinderList({
 
   function goToPlaceInfoPage(placeId) {
     history.push(`place/${placeId}`);
+  }
+
+  function getUrl({
+    searchQuery,
+    countryId,
+    categories,
+    levels,
+    offset,
+    limit,
+  }) {
+    const queryParamStr = searchQuery
+      ? `query=${searchQuery.replace(/s/g, "%20")}`
+      : "";
+    const parentsParamStr = `parents=country:${countryId}`;
+    const categoriesParamStr = categories
+      ? `categories=${categories.join("%7C")}`
+      : `categories=${DEFALUT_CATEGORIES_VALUES.join("%7C")}`;
+    const levelsParamStr = levels ? `levels=${levels}` : `levels=poi`;
+    const offsetParamStr = offset ? `offset=${offset}` : "";
+    const limitParamStr = limit ? `limit=${limit}` : "";
+
+    const url = `/places/list?
+      ${queryParamStr}&
+      ${parentsParamStr}&
+      ${categoriesParamStr}&
+      ${levelsParamStr}&
+      ${offsetParamStr}&
+      ${limitParamStr}
+    `;
+
+    return url;
   }
 }
 

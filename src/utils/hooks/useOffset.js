@@ -19,7 +19,7 @@ function useOffset(elRef, offset, cb) {
         setScrolled(false);
       }
     }
-  }, [scrolled]);
+  }, [scrolled, cb, elRef, offset]);
 
   useEffect(() => {
     document.addEventListener("scroll", onScroll);

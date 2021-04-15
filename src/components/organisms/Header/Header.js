@@ -7,7 +7,7 @@ function Header() {
   return (
     <Menu fixed="top" className="header">
       <Menu.Item>
-        <img className="header__logo" src={logo} />
+        <img className="header__logo" src={logo} alt="logo" />
       </Menu.Item>
       <Menu.Item>
         <NavLink
