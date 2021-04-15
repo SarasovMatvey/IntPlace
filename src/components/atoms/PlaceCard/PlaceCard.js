@@ -1,4 +1,4 @@
-import { Card } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import noImage from "./img/no-image.png";
 
 function PlaceCard({
@@ -9,17 +9,22 @@ function PlaceCard({
   fluid,
   onClick,
   placeId,
+  children,
 }) {
   return (
     <Card
       data-id={placeId}
       className={className || ""}
       fluid={fluid}
-      header={title}
-      image={poster || noImage}
-      description={description}
       onClick={onClick}
-    />
+    >
+      <Image src={poster || noImage} wrapped ui={false} />
+      <Card.Content>
+        <Card.Header>{title}</Card.Header>
+        <Card.Description>{description}</Card.Description>
+        {children}
+      </Card.Content>
+    </Card>
   );
 }
 

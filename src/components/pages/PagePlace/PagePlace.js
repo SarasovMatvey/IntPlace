@@ -10,6 +10,9 @@ import "./PagePlace.sass";
 function PagePlace() {
   const { id: placeId } = useParams();
   const [placeInfo, setPlaceInfo] = useState(null);
+  const [inLocalStorage, setInLocalStorage] = useState(
+    JSON.parse(localStorage.getItem("favPlaces"))?.includes(placeId) || false
+  );
 
   useEffect(() => {
     sygicAxios(`/places/${placeId}`).then(({ data: { data } }) => {
@@ -35,12 +38,29 @@ function PagePlace() {
                 Phone: placeInfo.phone,
                 Email: placeInfo.email,
               }}
+              inLocalStorage={inLocalStorage}
+              onFavBtnClick={onFavBtnClick}
             />
           ) : null}
         </Container>
       </div>
     </BaseTemplate>
   );
+
+  function onFavBtnClick() {
+    const favs = JSON.parse(localStorage.getItem("favPlaces")) || [];
+    const indexInLocalStorage = favs.indexOf(placeId);
+
+    if (indexInLocalStorage === -1) {
+      favs.push(placeId);
+      localStorage.setItem("favPlaces", JSON.stringify(favs));
+      setInLocalStorage(true);
+    } else {
+      favs.splice(indexInLocalStorage, 1);
+      localStorage.setItem("favPlaces", JSON.stringify(favs));
+      setInLocalStorage(false);
+    }
+  }
 }
 
 export default PagePlace;

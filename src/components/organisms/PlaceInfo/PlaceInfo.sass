@@ -1,6 +1,16 @@
 .place-info 
+  position: relative
   display: grid
   grid-template-columns: repeat(2, 50%)
+  &__fav-btn
+    position: absolute
+    top: .1rem
+    left: -1rem
+    font-size: 1.5em
+    background: none
+    border: none
+    color: #ff9800
+    cursor: pointer
   &__base-info
     padding: 0 2rem
     display: flex

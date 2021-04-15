@@ -1,12 +1,24 @@
-import { Header, Image, List } from "semantic-ui-react";
+import { useState } from "react";
+import { Header, Icon, Image, List } from "semantic-ui-react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import _ from "lodash";
 import "./PlaceInfo.sass";
 import "swiper/swiper.scss";
-import _ from "lodash";
 
-function PlaceInfo({ mainImg, placeName, description, media = [], params }) {
+function PlaceInfo({
+  mainImg,
+  placeName,
+  description,
+  media = [],
+  params,
+  inLocalStorage,
+  onFavBtnClick,
+}) {
   return (
     <div className="place-info">
+      <button className="place-info__fav-btn" onClick={onFavBtnClick}>
+        {inLocalStorage ? <Icon name="star" /> : <Icon name="star outline" />}
+      </button>
       <div className="place-info__base-info">
         <Header as="h1">{placeName}</Header>
         <p className="place-info__desc">{description}</p>

@@ -19,6 +19,15 @@ function Header() {
           Main
         </NavLink>
       </Menu.Item>
+      <Menu.Item>
+        <NavLink
+          className="header__link"
+          activeClassName="header__link_active"
+          to="/favorites"
+        >
+          Favorites
+        </NavLink>
+      </Menu.Item>
     </Menu>
   );
 }
