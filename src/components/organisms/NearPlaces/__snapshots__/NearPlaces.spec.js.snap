@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NearPlaces should renders properly 1`] = `
+<div
+  className="near-places "
+>
+  <Button
+    as="button"
+    onClick={[Function]}
+  >
+    Show
+     nearest places
+  </Button>
+</div>
+`;

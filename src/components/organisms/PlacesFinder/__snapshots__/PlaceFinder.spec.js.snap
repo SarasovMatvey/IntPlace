@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlacesFinder should renders properly 1`] = `
+<div
+  className="places-finder"
+>
+  <Input
+    className="places-finder__search-bar"
+    icon={
+      Object {
+        "circular": true,
+        "link": true,
+        "name": "search",
+        "onClick": [Function],
+      }
+    }
+    onChange={[Function]}
+    placeholder="Find Place..."
+    size="huge"
+    type="text"
+  />
+  <Button
+    as="button"
+    circular={true}
+    className="places-finder__settings-btn"
+    icon="settings"
+    onClick={[Function]}
+  />
+  <PlacesFinderRequestSettings
+    categories={
+      Array [
+        Object {
+          "text": "eating",
+          "value": "eating",
+        },
+        Object {
+          "text": "traveling",
+          "value": "traveling",
+        },
+        Object {
+          "text": "shopping",
+          "value": "shopping",
+        },
+      ]
+    }
+    countries={
+      Array [
+        Object {
+          "text": "Russia",
+          "value": 37,
+        },
+        Object {
+          "text": "USA",
+          "value": 43,
+        },
+        Object {
+          "text": "Japan",
+          "value": 75,
+        },
+      ]
+    }
+    defalutCategoriesValues={
+      Array [
+        "eating",
+        "traveling",
+        "shopping",
+      ]
+    }
+    defalutCountryValue={43}
+    isOpen={false}
+    onCategoriesChange={[Function]}
+    onCountryChange={[Function]}
+  />
+  <PlacesFinderList
+    categories={
+      Array [
+        "eating",
+        "traveling",
+        "shopping",
+      ]
+    }
+    countryId={43}
+    loadNewOffset={100}
+    placesInPage={20}
+    searchQuery={null}
+  />
+</div>
+`;

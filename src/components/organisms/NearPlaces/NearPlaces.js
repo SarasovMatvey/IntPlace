@@ -6,11 +6,9 @@ import PlaceCard from "../../atoms/PlaceCard";
 import { useHistory } from "react-router";
 import "./NearPlaces.sass";
 
-function NearPlaces({
-  className = "",
-  targetPlaceId,
-  area: { lat, lon, radius },
-}) {
+function NearPlaces({ className = "", targetPlaceId, area = {} }) {
+  const { lat, lon, radius } = area;
+
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [places, setPlaces] = useState([]);
@@ -25,7 +23,7 @@ function NearPlaces({
         setPlaces(placesWithoutSimilar);
       }
     );
-  }, [lat, lon, radius]);
+  }, [lat, lon, radius, targetPlaceId]);
 
   return (
     <div className={`near-places ${className}`}>

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseTemplate should renders properly 1`] = `
+<Fragment>
+  <Header />
+</Fragment>
+`;

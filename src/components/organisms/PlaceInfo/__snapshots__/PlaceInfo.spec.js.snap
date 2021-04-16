@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlaceInfo should renders properly 1`] = `
+<div
+  className="place-info "
+>
+  <button
+    className="place-info__fav-btn"
+  >
+    <Icon
+      as="i"
+      name="star outline"
+    />
+  </button>
+  <div
+    className="place-info__base-info"
+  >
+    <Header
+      as="h1"
+    />
+    <p
+      className="place-info__desc"
+    />
+    <List
+      className="place-info__params"
+    />
+    <div>
+      <Swiper
+        className="place-info__swiper"
+        observeParents={true}
+        observeSlideChildren={true}
+        observer={true}
+        slidesPerView={1}
+        spaceBetween={50}
+      />
+    </div>
+  </div>
+  <Image
+    as="img"
+    className="place-info__main-img"
+    size="big"
+    ui={true}
+  />
+</div>
+`;

@@ -1,10 +1,10 @@
 import Masonry from "react-responsive-masonry";
 import FavPlacesCard from "./FavPlacesCard";
-import "./FavPlaces.sass";
 import sygicAxios from "../../../api/sygic";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
+import "./FavPlaces.sass";
 
 function FavPlaces() {
   const history = useHistory();

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should renders properly 1`] = `
+<Menu
+  className="header"
+  fixed="top"
+>
+  <MenuItem>
+    <img
+      alt="logo"
+      className="header__logo"
+      src="logo.png"
+    />
+  </MenuItem>
+  <MenuItem>
+    <NavLink
+      activeClassName="header__link_active"
+      className="header__link"
+      exact={true}
+      to="/"
+    >
+      Main
+    </NavLink>
+  </MenuItem>
+  <MenuItem>
+    <NavLink
+      activeClassName="header__link_active"
+      className="header__link"
+      to="/favorites"
+    >
+      Favorites
+    </NavLink>
+  </MenuItem>
+</Menu>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavPlaces should renders properly 1`] = `
+<div
+  className="fav-places"
+>
+  <Masonry
+    className={null}
+    columnsCount={4}
+    gutter="2rem"
+    style={Object {}}
+  />
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PagePlace should renders properly 1`] = `
+<BaseTemplate>
+  <div
+    className="page-place"
+  >
+    <Container />
+  </div>
+</BaseTemplate>
+`;

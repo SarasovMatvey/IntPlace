@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageHome should renders properly 1`] = `
+<BaseTemplate>
+  <div
+    className="page-home"
+  >
+    <Container>
+      <PlacesFinder />
+    </Container>
+  </div>
+</BaseTemplate>
+`;

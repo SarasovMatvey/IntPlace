@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlaceCard should renders properly 1`] = `
+<Card
+  className=""
+>
+  <Image
+    as="img"
+    src="no-image.png"
+    ui={false}
+    wrapped={true}
+  />
+  <CardContent>
+    <CardHeader />
+    <CardDescription />
+  </CardContent>
+</Card>
+`;
